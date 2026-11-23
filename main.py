@@ -28,6 +28,8 @@ def main() -> None:
     if not ("A" <= LETTER <= "Z"):
         raise SystemExit(f"letter must be A-Z, got {LETTER!r}")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    # The sealed grader runs in a stock sandbox where /output may not
+    # exist yet; create it rather than assuming the harness did.
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "w", encoding="utf-8") as f:
